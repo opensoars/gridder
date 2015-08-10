@@ -38,7 +38,7 @@ function calculate(data) {
   };
 }
 
-function onCalculateClick(evt) {
+function callCalculate(evt) {
   fillResults(calculate({
     content_size: content_size_input.value,
     box_count: box_count_input.value,
@@ -47,7 +47,12 @@ function onCalculateClick(evt) {
   }));
 }
 
-calculate_btn.addEventListener('click', onCalculateClick);
+content_size_input.addEventListener('keyup', callCalculate);
+box_count_input.addEventListener('keyup', callCalculate);
+space_between_input.addEventListener('keyup', callCalculate);
+container_padding_input.addEventListener('keyup', callCalculate);
+
+calculate_btn.addEventListener('click', callCalculate);
 
 function fillResults(res) {
   space_between_reduction_output.value = res.space_between_reduction;
