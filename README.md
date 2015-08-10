@@ -15,4 +15,4 @@ If you want to hack it:
 
 If you just want to use it:
 
-* Browse to [gridder.opensoars.github.io](https://gridder.opensoars.github.io]).
+* Browse to [opensoars.github.io/gridder](https://opensoars.github.io/gridder]).
