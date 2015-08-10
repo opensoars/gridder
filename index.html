@@ -1,8 +1,53 @@
-<input id='content_size' type='text' placeholder='Content size'><br>
-<input id='box_count' type='text' placeholder='Box count'><br>
-<input id='space_between' type='text' placeholder='Space between'><br>
-<input id='container_padding' type='text' placeholder='Padding size'><br>
-<br>
-<button id='calculate_btn'>Calculate</button>
+<html>
+<head>
+  <title>Gridder</title>
+  <link rel="icon" type="image/png" href="style/img/favicon.png">
 
-<script src='js/main.js'></script>
+  <link rel='stylesheet' type='text/css' href='style/css/main.css'>
+</head>
+<body>
+
+  <header>
+    <h1>Gridder</h1>
+  </header>
+
+  <main>
+
+    <section class='inputs'>
+      <div class='input'>
+        <input id='content_size' type='text' placeholder='Content size'>
+        - Content size
+      </div>
+      <div class='input'>
+        <input id='box_count' type='text' placeholder='Box count'>
+        - Box count
+      </div>
+      <div class='input'>
+        <input id='space_between' type='text' placeholder='Space between'>
+        - Space between
+      </div>
+      <div class='input'>
+        <input id='container_padding' type='text' placeholder='Padding size'>
+        - Padding size
+      </div>
+    </section>
+
+    <section class='buttons'>
+      <button id='calculate_btn'>Calculate</button>
+    </section>
+
+    <section id='results' class='results'>
+
+    </section>
+
+  </main>
+
+  <footer>
+    By <a href='https://opensoars.github.io'>Opensoars</a>
+  </footer>
+
+
+  <script src='js/main.js'></script>
+
+</body>
+</html>
