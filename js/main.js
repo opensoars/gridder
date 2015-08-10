@@ -2,10 +2,19 @@ var content_size_input = document.getElementById('content_size'),
     box_count_input = document.getElementById('box_count'),
     space_between_input = document.getElementById('space_between'),
     container_padding_input = document.getElementById('container_padding');
+
+var space_between_reduction_output =
+      document.getElementById('space_between_reduction_output');
+    container_padding_reduction_output =
+      document.getElementById('container_padding_reduction_output');
+    remaining_content_size_output =
+      document.getElementById('remaining_content_size_output');
+    box_size_output = document.getElementById('box_size_output');
+
   
 var calculate_btn = document.getElementById('calculate_btn');
 
-var results = document.getElementById('results');
+var results_container = document.getElementById('results_container');
 
 function calculate(data) {
   var content_size = data.content_size || 0,
@@ -30,20 +39,24 @@ function calculate(data) {
 }
 
 function onCalculateClick(evt) {
-  var results = calculate({
+  fillResults(calculate({
     content_size: content_size_input.value,
     box_count: box_count_input.value,
     space_between: space_between_input.value,
     container_padding: container_padding_input.value
-  });
-
-  console.log(results);
-
+  }));
 }
 
 calculate_btn.addEventListener('click', onCalculateClick);
 
+function fillResults(res) {
+  space_between_reduction_output.value = res.space_between_reduction;
+  container_padding_reduction_output.value = res.container_padding_reduction;
+  remaining_content_size_output.value = res.remaining_content_size;
+  box_size_output.value = res.box_size;
 
+  console.log(res);
+}
 
 
 function setFixtures() {

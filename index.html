@@ -19,15 +19,15 @@
         - Content size
       </div>
       <div class='input'>
-        <input id='box_count' type='text' placeholder='Box count'>
+        <input id='box_count' type='text' placeholder='Box count' tabindex='0'>
         - Box count
       </div>
       <div class='input'>
-        <input id='space_between' type='text' placeholder='Space between'>
+        <input id='space_between' type='text' placeholder='Space between' tabindex='0'>
         - Space between
       </div>
       <div class='input'>
-        <input id='container_padding' type='text' placeholder='Padding size'>
+        <input id='container_padding' type='text' placeholder='Padding size' tabindex='0'>
         - Padding size
       </div>
     </section>
@@ -36,8 +36,23 @@
       <button id='calculate_btn'>Calculate</button>
     </section>
 
-    <section id='results' class='results'>
-      
+    <section id='results_container' class='results-container'>
+      <div class='output'>
+        <input type='text' id='space_between_reduction_output'>
+         - Space between reduction
+       </div>
+      <div class='output'>
+        <input type='text' id='container_padding_reduction_output'>
+         - Container padding reduction
+       </div>
+      <div class='output'>
+        <input type='text' id='remaining_content_size_output'>
+         - Remaining content size
+       </div>
+        <div class='output'>
+          <input type='text' id='box_size_output'>
+           - Box size
+         </div>
     </section>
 
   </main>

@@ -1,5 +1,10 @@
-main div.input {
+main div.input, main div.output {
   margin-bottom: 10px;
+}
+
+section.buttons {
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 footer {
