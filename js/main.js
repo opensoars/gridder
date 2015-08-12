@@ -9,24 +9,33 @@ var key_map = {
   down: 40
 }
 
+// Helpers
+function getEl(id) {
+  return document.getElementById(id);
+}
+
 // Inputs
-var content_size_input = document.getElementById('content_size'),
-    box_count_input = document.getElementById('box_count'),
-    space_between_input = document.getElementById('space_between'),
-    container_padding_input = document.getElementById('container_padding'),
-    border_box_input = document.getElementById('border_box');
+var content_size_input = getEl('content_size'),
+    box_count_input = getEl('box_count'),
+    space_between_input = getEl('space_between'),
+    container_padding_input = getEl('container_padding'),
+    border_box_input = getEl('border_box');
 
 // Outputs
-var results_container = document.getElementById('results_container');
+var results_container = getEl('results_container');
 
-var space_between_reduction_output =
-      document.getElementById('space_between_reduction_output');
-    container_padding_reduction_output =
-      document.getElementById('container_padding_reduction_output');
-    remaining_content_size_output =
-      document.getElementById('remaining_content_size_output');
-    box_size_output = document.getElementById('box_size_output');
+var space_between_reduction_output = getEl('space_between_reduction_output');
+    container_padding_reduction_output = getEl('container_padding_reduction_output');
+    remaining_content_size_output = getEl('remaining_content_size_output');
+    box_size_output = getEl('box_size_output');
 
+// Buttons
+var preview_btn = getEl('preview_btn'),
+    close_preview_btn = getEl('close_preview_btn');
+
+// Etc
+var preview_layer = getEl('preview_layer'),
+    preview_layer_content = getEl('preview_layer_content');
 
 function calculate(data) {
   var content_size = data.content_size || 0,
@@ -82,13 +91,83 @@ function setFixtures() {
 function handleKeydown(evt) {
 
   if (evt.which === key_map.up) {
-    evt.target.value += 1;
+    evt.target.value = parseFloat(evt.target.value) + 1;
   }
   else if (evt.which === key_map.down) {
-    evt.target.value -= 1;
+    evt.target.value = parseFloat(evt.target.value) - 1;
   }
 
+  evt.preventDefault();
 }
+
+function getPreviewHtml(data) {
+
+  var html = "";
+
+  var box_count = data.box_count,
+      box_size = data.res.box_size,
+      space_between = data.space_between,
+      padding = data.padding;
+
+  html += "<div class='preview' style='margin:0 auto;width: \
+    " + data.content_size + "px;height:100%;background:rgb(245, 245, 245);'> \
+  ";
+
+
+  for (var i = 1; i <= box_count; i++) {
+    html += "<div style='width:" + box_size + "px; padding:" + padding + "px;' \
+      id='box" + i + "' class='box'>";
+
+    html += "<div class='inner' style='height: " + (window.innerHeight - (padding*2)) + "px;'>" + i + "</div>"
+
+    // /box
+    html += "</div>";
+
+    if (i < box_count) {
+      console.log(i);
+      html += "<div class='gutter' style='width:" + space_between + "px;'></div>";
+    }
+  }
+
+
+  // /container
+  html += "</div>";
+
+  console.log(data);
+  return html;
+}
+
+function showPreview() {
+  preview_layer_content.innerHTML = getPreviewHtml({
+
+    box_count: box_count_input.value,
+    content_size: content_size_input.value,
+    space_between: space_between_input.value,
+    border_box: border_box_input.checked,
+    padding: container_padding_input.value,
+    res: {
+      space_between_reduction: space_between_reduction_output.value,
+      container_padding_reduction: container_padding_reduction_output.value,
+      remaining_content_size: remaining_content_size_output.value,
+      box_size: box_size_output.value
+    }    
+  });
+
+  document.body.style.overflowY = 'hidden';
+
+  preview_layer.style.display = 'block';
+}
+
+function closePreview() {
+  document.body.style.overflowY = 'auto';
+  preview_layer.style.display = 'none';
+}
+
+window.addEventListener('resize', function (evt) {
+  if (preview_layer.style.display === 'block') {
+    showPreview();
+  }
+});
 
 
 function init() {
@@ -102,9 +181,11 @@ function init() {
   space_between_input.addEventListener('keydown', handleKeydown);
   container_padding_input.addEventListener('keydown', handleKeydown);
 
-
-
   border_box_input.addEventListener('click', callCalculate);
+
+  preview_btn.addEventListener('click', showPreview);
+  close_preview_btn.addEventListener('click', closePreview);
+
 
   setFixtures();
   content_size_input.focus();
