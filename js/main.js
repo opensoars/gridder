@@ -24,9 +24,11 @@ var content_size_input = getEl('content_size'),
 // Outputs
 var results_container = getEl('results_container');
 
-var space_between_reduction_output = getEl('space_between_reduction_output');
-    container_padding_reduction_output = getEl('container_padding_reduction_output');
-    remaining_content_size_output = getEl('remaining_content_size_output');
+var space_between_reduction_output = getEl('space_between_reduction_output'),
+    container_padding_reduction_output = getEl(
+      'container_padding_reduction_output'
+    ),
+    remaining_content_size_output = getEl('remaining_content_size_output'),
     box_size_output = getEl('box_size_output');
 
 // Buttons
@@ -54,7 +56,8 @@ function calculate(data) {
     ? 0
     : (container_padding * 2) * box_count;
 
-  var remaining_content_size = content_size - space_between_reduction - padding_reduction;
+  var remaining_content_size =
+    content_size - space_between_reduction - padding_reduction;
 
   var box_size;
 
@@ -130,15 +133,17 @@ function getPreviewHtml(data) {
 
 
   for (var i = 1; i <= box_count; i++) {
-    html += "<div style='min-width:" + box_size + "px; padding:" + padding + "px;' \
-      id='box" + i + "' class='box'>";
+    html += "<div style='min-width:" + box_size + "px; padding:" +
+      padding + "px;' id='box" + i + "' class='box'>";
 
-    html += "<div class='inner' style='height: " + (window.innerHeight - (padding*2)) + "px;'>" + i + "</div>"
+    html += "<div class='inner' style='height: " +
+      (window.innerHeight - (padding*2)) + "px;'>" + i + "</div>"
 
     html += "</div>";
 
     if (i < box_count) {
-      html += "<div class='gutter' style='min-width:" + space_between + "px;'></div>";
+      html += "<div class='gutter' style='min-width:" + space_between
+        + "px;'></div>";
     }
   }
 
@@ -159,23 +164,22 @@ function getLivePreviewHtml(data) {
       content_size = data.content_size,
       total_padding = data.container_padding_reduction;
 
-
-      console.log(box_size);
-
   html += "<div id='live_preview_content' style='margin:0 auto;width: \
   " + content_size + "px; background:rgb(245, 245, 245); height: 100%;'>";
 
 
   for (var i = 1; i <= box_count; i++) {
-    html += "<div style='min-width:" + box_size + "px; padding:" + padding + "px; height: 250px;' \
-      id='box" + i + "' class='box'>";
+    html += "<div style='min-width:" + box_size + "px; padding:" + padding +
+      "px; height: 250px;' id='box" + i + "' class='box'>";
 
-    html += "<div class='inner' style='height: " + (250 - padding * 2) + "px;'>" + i + "</div>"
+    html += "<div class='inner' style='height: " + (250 - padding * 2) +
+      "px;'>" + i + "</div>"
 
     html += "</div>";
 
     if (i < box_count) {
-      html += "<div class='gutter' style='min-width:" + space_between + "px;'></div>";
+      html += "<div class='gutter' style='min-width:" + space_between +
+        "px;'></div>";
     }
   }
 
