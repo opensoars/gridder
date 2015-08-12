@@ -12,6 +12,8 @@ header {
 }
 
 footer {
+  margin-left: 20px;
+  margin-bottom: 20px;
   margin-top: 40px;
 }
 
@@ -40,24 +42,33 @@ footer {
   display: -webkit-flex; display: flex; -webkit-flex-direction: row; flex-direction: row;
 }
 
-.preview .gutter {
+.gutter {
   background: #F9CC9D;
 }
 
-.preview .box {
+.box {
   background: #C3DEB7;
 }
 
-.preview .inner {
+.inner {
   background: #A0C5E8;
   height: 100%;
 }
 
+#live_preview {
+  width: 100%;
+  height: 250px;
+  display: block;
+  box-sizing: content-box !important;
+}
+
+#live_preview_content {
+  display: -webkit-flex; display: flex; -webkit-flex-direction: row; flex-direction: row;
+}
+
+ 
+
 
 /**
-
-  
   Toggle input/output on preview page. Allows for interactivity
-
-
 */

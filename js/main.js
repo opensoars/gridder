@@ -37,6 +37,8 @@ var preview_btn = getEl('preview_btn'),
 var preview_layer = getEl('preview_layer'),
     preview_layer_content = getEl('preview_layer_content');
 
+var live_preview = getEl('live_preview');
+
 function calculate(data) {
   var content_size = data.content_size || 0,
       box_count = data.box_count || 0,
@@ -79,6 +81,8 @@ function callCalculate(evt) {
     container_padding: container_padding_input.value,
     border_box: border_box_input.checked
   }));
+
+  showLivePreview();
 }
 
 function fillResults(res) {
@@ -120,9 +124,6 @@ function getPreviewHtml(data) {
       total_padding = data.container_padding_reduction;
 
 
-
-      console.log(box_size, padding);
-
   html += "<div class='preview' style='margin:0 auto;width: \
     " + data.content_size + "px;height:100%;background:rgb(245, 245, 245);'> \
   ";
@@ -142,17 +143,45 @@ function getPreviewHtml(data) {
     }
   }
 
-
-  // /container
   html += "</div>";
 
-  console.log(data);
+  return html;
+}
+
+function getLivePreviewHtml(data) {
+  var html = '';
+
+  var box_count = data.box_count,
+      box_size = data.res.box_size,
+      space_between = data.space_between,
+      padding = data.padding,
+      border_box = data.border_box,
+      content_size = data.content_size,
+      total_padding = data.container_padding_reduction;
+
+  html += "<div id='live_preview_content' style='margin:0 auto;width: \
+  " + content_size + "px; background:rgb(245, 245, 245); height: 100%;'>";
+
+  for (var i = 1; i <= box_count; i++) {
+    html += "<div style='width:" + box_size + "px; padding:" + padding + "px; height: 250px;' \
+      id='box" + i + "' class='box'>";
+
+    html += "<div class='inner' style='height: " + (250 - padding * 2) + "px;'>" + i + "</div>"
+
+    html += "</div>";
+
+    if (i < box_count) {
+      html += "<div class='gutter' style='min-width:" + space_between + "px;'></div>";
+    }
+  }
+
+  html += "</div>";
+
   return html;
 }
 
 function showPreview() {
   preview_layer_content.innerHTML = getPreviewHtml({
-
     box_count: box_count_input.value,
     content_size: content_size_input.value,
     space_between: space_between_input.value,
@@ -181,6 +210,22 @@ window.addEventListener('resize', function (evt) {
     showPreview();
   }
 });
+
+function showLivePreview() {
+  live_preview.innerHTML = getLivePreviewHtml({
+    box_count: box_count_input.value,
+    content_size: content_size_input.value,
+    space_between: space_between_input.value,
+    border_box: border_box_input.checked,
+    padding: container_padding_input.value,
+    res: {
+      space_between_reduction: space_between_reduction_output.value,
+      container_padding_reduction: container_padding_reduction_output.value,
+      remaining_content_size: remaining_content_size_output.value,
+      box_size: box_size_output.value
+    }   
+  });
+}
 
 
 function init() {
