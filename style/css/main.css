@@ -39,7 +39,10 @@ footer {
 .preview {
   position:relative;
   display: block;
-  display: -webkit-flex; display: flex; -webkit-flex-direction: row; flex-direction: row;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
 }
 
 .gutter {
@@ -63,12 +66,8 @@ footer {
 }
 
 #live_preview_content {
-  display: -webkit-flex; display: flex; -webkit-flex-direction: row; flex-direction: row;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: row;
+  flex-direction: row;
 }
-
- 
-
-
-/**
-  Toggle input/output on preview page. Allows for interactivity
-*/
