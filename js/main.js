@@ -89,15 +89,14 @@ function setFixtures() {
 }
 
 function handleKeydown(evt) {
-
   if (evt.which === key_map.up) {
     evt.target.value = parseFloat(evt.target.value) + 1;
+    evt.preventDefault();
   }
   else if (evt.which === key_map.down) {
     evt.target.value = parseFloat(evt.target.value) - 1;
+    evt.preventDefault();
   }
-
-  evt.preventDefault();
 }
 
 function getPreviewHtml(data) {
