@@ -7,7 +7,7 @@
 var key_map = {
   up: 38,
   down: 40
-}
+};
 
 // Helpers
 function getEl(id) {
