@@ -1,7 +1,7 @@
 Gridder
 =======
 
-Calculate website grids easily
+Calculate website grids easily.
 
 
 ---
@@ -16,3 +16,8 @@ If you want to hack it:
 If you just want to use it:
 
 * Browse to [https://opensoars.github.io/gridder/](https://opensoars.github.io/gridder/).
+
+
+## License
+
+[License ](https://github.com/opensoars/gridder/blob/master/LICENSE)
