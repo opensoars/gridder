@@ -54,7 +54,14 @@ function calculate(data) {
 
   var remaining_content_size = content_size - space_between_reduction - padding_reduction;
 
-  var box_size = remaining_content_size / box_count;
+  var box_size;
+
+  if (!data.border_box) {
+    box_size = content_size / box_count;
+  }
+  else {
+    box_size = remaining_content_size / box_count;
+  }
 
   return {
     space_between_reduction: space_between_reduction,
@@ -69,7 +76,8 @@ function callCalculate(evt) {
     content_size: content_size_input.value,
     box_count: box_count_input.value,
     space_between: space_between_input.value,
-    container_padding: container_padding_input.value
+    container_padding: container_padding_input.value,
+    border_box: border_box_input.checked
   }));
 }
 
@@ -106,7 +114,14 @@ function getPreviewHtml(data) {
   var box_count = data.box_count,
       box_size = data.res.box_size,
       space_between = data.space_between,
-      padding = data.padding;
+      padding = data.padding,
+      border_box = data.border_box,
+      content_size = data.content_size,
+      total_padding = data.container_padding_reduction;
+
+
+
+      console.log(box_size, padding);
 
   html += "<div class='preview' style='margin:0 auto;width: \
     " + data.content_size + "px;height:100%;background:rgb(245, 245, 245);'> \
@@ -114,7 +129,7 @@ function getPreviewHtml(data) {
 
 
   for (var i = 1; i <= box_count; i++) {
-    html += "<div style='width:" + box_size + "px; padding:" + padding + "px;' \
+    html += "<div style='min-width:" + box_size + "px; padding:" + padding + "px;' \
       id='box" + i + "' class='box'>";
 
     html += "<div class='inner' style='height: " + (window.innerHeight - (padding*2)) + "px;'>" + i + "</div>"
@@ -123,8 +138,7 @@ function getPreviewHtml(data) {
     html += "</div>";
 
     if (i < box_count) {
-      console.log(i);
-      html += "<div class='gutter' style='width:" + space_between + "px;'></div>";
+      html += "<div class='gutter' style='min-width:" + space_between + "px;'></div>";
     }
   }
 
