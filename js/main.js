@@ -125,7 +125,7 @@ function getPreviewHtml(data) {
 
 
   html += "<div class='preview' style='margin:0 auto;width: \
-    " + data.content_size + "px;height:100%;background:rgb(245, 245, 245);'> \
+    " + content_size + "px;height:100%;background:rgb(245, 245, 245);'> \
   ";
 
 
@@ -135,7 +135,6 @@ function getPreviewHtml(data) {
 
     html += "<div class='inner' style='height: " + (window.innerHeight - (padding*2)) + "px;'>" + i + "</div>"
 
-    // /box
     html += "</div>";
 
     if (i < box_count) {
@@ -149,6 +148,7 @@ function getPreviewHtml(data) {
 }
 
 function getLivePreviewHtml(data) {
+
   var html = '';
 
   var box_count = data.box_count,
@@ -159,11 +159,15 @@ function getLivePreviewHtml(data) {
       content_size = data.content_size,
       total_padding = data.container_padding_reduction;
 
+
+      console.log(box_size);
+
   html += "<div id='live_preview_content' style='margin:0 auto;width: \
   " + content_size + "px; background:rgb(245, 245, 245); height: 100%;'>";
 
+
   for (var i = 1; i <= box_count; i++) {
-    html += "<div style='width:" + box_size + "px; padding:" + padding + "px; height: 250px;' \
+    html += "<div style='min-width:" + box_size + "px; padding:" + padding + "px; height: 250px;' \
       id='box" + i + "' class='box'>";
 
     html += "<div class='inner' style='height: " + (250 - padding * 2) + "px;'>" + i + "</div>"

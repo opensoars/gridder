@@ -48,6 +48,7 @@ footer {
 
 .box {
   background: #C3DEB7;
+  display: block;
 }
 
 .inner {
@@ -59,7 +60,6 @@ footer {
   width: 100%;
   height: 250px;
   display: block;
-  box-sizing: content-box !important;
 }
 
 #live_preview_content {
