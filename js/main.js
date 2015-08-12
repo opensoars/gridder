@@ -1,7 +1,23 @@
+/**
+ * ! WARNING !
+ * UGLY CODE, 15 min project
+ * ! WARNING !
+ */
+
+var key_map = {
+  up: 38,
+  down: 40
+}
+
+// Inputs
 var content_size_input = document.getElementById('content_size'),
     box_count_input = document.getElementById('box_count'),
     space_between_input = document.getElementById('space_between'),
-    container_padding_input = document.getElementById('container_padding');
+    container_padding_input = document.getElementById('container_padding'),
+    border_box_input = document.getElementById('border_box');
+
+// Outputs
+var results_container = document.getElementById('results_container');
 
 var space_between_reduction_output =
       document.getElementById('space_between_reduction_output');
@@ -11,10 +27,6 @@ var space_between_reduction_output =
       document.getElementById('remaining_content_size_output');
     box_size_output = document.getElementById('box_size_output');
 
-  
-var calculate_btn = document.getElementById('calculate_btn');
-
-var results_container = document.getElementById('results_container');
 
 function calculate(data) {
   var content_size = data.content_size || 0,
@@ -23,16 +35,21 @@ function calculate(data) {
       container_padding = data.container_padding || 0;
 
   var space_between_reduction = (space_between * (box_count - 1)),
-      container_padding_reduction = container_padding * 2,
+      container_padding_reduction = border_box_input.checked
+        ? 0 : container_padding * 2,
       total_reduction = space_between_reduction + container_padding_reduction;
 
-  var remaining_content_size = content_size - total_reduction;
+  var padding_reduction = border_box_input.checked
+    ? 0
+    : (container_padding * 2) * box_count;
+
+  var remaining_content_size = content_size - space_between_reduction - padding_reduction;
 
   var box_size = remaining_content_size / box_count;
 
   return {
     space_between_reduction: space_between_reduction,
-    container_padding_reduction: container_padding_reduction,
+    container_padding_reduction: padding_reduction,
     remaining_content_size: remaining_content_size,
     box_size: box_size
   };
@@ -47,31 +64,52 @@ function callCalculate(evt) {
   }));
 }
 
-content_size_input.addEventListener('keyup', callCalculate);
-box_count_input.addEventListener('keyup', callCalculate);
-space_between_input.addEventListener('keyup', callCalculate);
-container_padding_input.addEventListener('keyup', callCalculate);
-
-calculate_btn.addEventListener('click', callCalculate);
-
 function fillResults(res) {
   space_between_reduction_output.value = res.space_between_reduction;
   container_padding_reduction_output.value = res.container_padding_reduction;
   remaining_content_size_output.value = res.remaining_content_size;
   box_size_output.value = res.box_size;
-
-  console.log(res);
 }
 
 
 function setFixtures() {
   content_size.value = '1170';
-  box_count.value = 3;
+  box_count.value = 4;
   space_between.value = 50;
   container_padding.value = 25;
 }
 
-setFixtures();
+function handleKeydown(evt) {
+
+  if (evt.which === key_map.up) {
+    evt.target.value += 1;
+  }
+  else if (evt.which === key_map.down) {
+    evt.target.value -= 1;
+  }
+
+}
 
 
-content_size_input.focus();
+function init() {
+  content_size_input.addEventListener('keyup', callCalculate);
+  box_count_input.addEventListener('keyup', callCalculate);
+  space_between_input.addEventListener('keyup', callCalculate);
+  container_padding_input.addEventListener('keyup', callCalculate);
+
+  content_size_input.addEventListener('keydown', handleKeydown);
+  box_count_input.addEventListener('keydown', handleKeydown);
+  space_between_input.addEventListener('keydown', handleKeydown);
+  container_padding_input.addEventListener('keydown', handleKeydown);
+
+
+
+  border_box_input.addEventListener('click', callCalculate);
+
+  setFixtures();
+  content_size_input.focus();
+  callCalculate();
+}
+
+
+init();

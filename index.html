@@ -3,64 +3,85 @@
   <title>Gridder</title>
   <link rel="icon" type="image/png" href="style/img/favicon.png">
 
+  <link rel='stylesheet' type='text/css' href='style/css/bootstrap.css'>
+
   <link rel='stylesheet' type='text/css' href='style/css/main.css'>
 </head>
 <body>
 
-  <header>
-    <h1>Gridder</h1>
-  </header>
+  <!-- <div id='preview_layer'></div> -->
 
-  <main>
+  <div class='page'>
 
-    <section class='inputs'>
-      <div class='input'>
-        <input id='content_size' type='text' placeholder='Content size'>
-        - Content size
-      </div>
-      <div class='input'>
-        <input id='box_count' type='text' placeholder='Box count' tabindex='0'>
-        - Box count
-      </div>
-      <div class='input'>
-        <input id='space_between' type='text' placeholder='Space between' tabindex='0'>
-        - Space between
-      </div>
-      <div class='input'>
-        <input id='container_padding' type='text' placeholder='Padding size' tabindex='0'>
-        - Padding size
-      </div>
-    </section>
+    <header>
+      <h1>Gridder</h1>
+    </header>
 
-    <section class='buttons'>
-      <button id='calculate_btn'>Calculate</button>
-    </section>
 
-    <section id='results_container' class='results-container'>
-      <div class='output'>
-        <input type='text' id='remaining_content_size_output'>
-         - Remaining content size (w/out padding and space between)
-      </div>
-      <div class='output'>
-        <input type='text' id='box_size_output'>
-         - Box size
-      </div>
-      <div class='output'>
-        <input type='text' id='space_between_reduction_output'>
-         - Space between (total reduction)
-      </div>
-      <div class='output'>
-        <input type='text' id='container_padding_reduction_output'>
-         - Container padding (total reduction)
-      </div>
-    </section>
+    <main>
 
-  </main>
+      <section class='inputs'>
+        <div class='input'>
+          <input id='content_size' type='text' placeholder='Content size'>
+          - Content size
+        </div>
+        <div class='input'>
+          <input id='box_count' type='text' placeholder='Box count'
+                 tabindex='0'>
+          - Box count
+        </div>
+        <div class='input'>
+          <input id='space_between' type='text' placeholder='Space between'
+                 tabindex='0'>
+          - Space between boxes (gutters)
+        </div>
+        <div class='input'>
+          <input id='container_padding' type='text' placeholder='Padding size'
+                 tabindex='0'>
+          - Padding
+        </div>
 
-  <footer>
-    By <a href='https://opensoars.github.io'>Opensoars</a>
-  </footer>
+        <div class='input'>
+          <input id='border_box' type='checkbox' checked='true'>
+          - Border box (padding doens't increase size of box)
+        </div>
+      </section>
 
+      <hr>
+
+      <section id='results_container' class='results-container'>
+        <div class='output'>
+          <input type='text' id='remaining_content_size_output'>
+           - Remaining content size (w/out padding and space between boxes (gutters))
+        </div>
+        <div class='output'>
+          <input type='text' id='box_size_output'>
+           - Box size
+        </div>
+        <div class='output'>
+          <input type='text' id='space_between_reduction_output'>
+           - Space between boxes (gutters) total
+        </div>
+        <div class='output'>
+          <input type='text' id='container_padding_reduction_output'>
+           - Padding total
+        </div>
+      </section>
+
+      <hr>
+
+      <section class='buttons'>
+        <button id='preview_btn'>Preview</button>
+      </section>
+
+    </main>
+
+
+    <footer>
+      By <a href='https://opensoars.github.io'>Opensoars</a>
+    </footer>
+
+  </div>
 
   <script src='js/main.js'></script>
 

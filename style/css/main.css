@@ -2,13 +2,23 @@ main div.input, main div.output {
   margin-bottom: 10px;
 }
 
-section.buttons {
-  margin-bottom: 20px;
-  margin-top: 20px;
+div.page {
+  padding: 20px;
+  z-index: 1;
+}
+
+header {
+  margin-bottom: 40px;
 }
 
 footer {
-  position: absolute;
-  bottom: 0px;
-  margin-bottom: 5px;
+  margin-top: 40px;
+}
+
+#preview_layer {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: red;
+  z-index: 2;
 }
